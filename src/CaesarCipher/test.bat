@@ -1,4 +1,6 @@
 
+@ECHO OFF
+
 pushd rust
 ECHO '-- rust'
 cargo test 
