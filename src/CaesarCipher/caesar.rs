@@ -1,6 +1,7 @@
 #![allow(unused)]
 
 use std::env;
+use std::io::{self, Write};
 
 fn main() {
     let (cmd, text, code) = inputs();
@@ -19,8 +20,19 @@ pub fn inputs() -> (String, String, char) {
     if args.len() >= 3 {
         return (args[0].clone(), args[1].clone(), args[2].chars().nth(0).unwrap());
     } else {
-        return (args[0].clone(), "Hello, world!".to_string(), 'H')
+        return (args[0].clone(), input("message? "), input("key? ").chars().nth(0).unwrap())
     }
+}
+
+pub fn input(prompt: &str) -> String {
+    let mut input = String::new();
+    let stdin = io::stdin();
+
+    print!("{}", prompt);
+    io::stdout().flush().unwrap();
+    stdin.read_line(&mut input).unwrap();
+    input.trim_end();
+    return input;
 }
 
 pub fn char_offset(input: char) -> u8 {

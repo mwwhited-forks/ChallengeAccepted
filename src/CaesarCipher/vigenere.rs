@@ -20,7 +20,10 @@ pub fn inputs() -> (String, String, String) {
     if args.len() >= 3 {
         return (args[0].clone(), args[1].clone(), args[2].clone());
     } else {
-        return (args[0].clone(), "Hello, world!".to_string(), "Hello, world".to_string())
+        let mut message = String::new();
+        let mut code = String::new();
+        
+        return (args[0].clone(), caesar::input("message? "), caesar::input("key? "))
     }
 }
 
