@@ -1,0 +1,20 @@
+[package]
+name = "shift-ciphers"
+version = "0.1.0"
+authors = ["matthew Whited <matt@whited.us>"]
+edition = "2018"
+
+[dependencies]
+
+[dev-dependencies]
+
+[[bin]]
+name = "caesar-cipher"
+path = "caesar.rs"
+
+[[bin]]
+name = "vigenere-cipher"
+path = "vigenere.rs"
+
+[profile.release]
+opt-level = 3

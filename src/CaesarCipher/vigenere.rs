@@ -5,8 +5,8 @@ use std::env;
 
 fn main() {
     let (cmd, text, code) = inputs();
-    let encoded =  shift_cipher_encode(&text, &code);
-    let decoded =  shift_cipher_decode(&encoded, &code);
+    let encoded = shift_cipher_encode(&text, &code);
+    let decoded = shift_cipher_decode(&encoded, &code);
 
     println!("Command: {}", cmd);
     println!("Text: {}", text);
@@ -15,51 +15,68 @@ fn main() {
     println!("Decode: {}", decoded);
 }
 
-pub fn inputs() -> (String, String, String) {
-    let args: Vec<String> = std::env::args().collect();
+fn inputs() -> (String, String, String) {
+    let args: Vec<String> = env::args().collect();
     if args.len() >= 3 {
-        return (args[0].clone(), args[1].clone(), args[2].clone());
+        (args[0].clone(), args[1].clone(), args[2].clone())
     } else {
-        let mut message = String::new();
-        let mut code = String::new();
-        
-        return (args[0].clone(), caesar::input("message? "), caesar::input("key? "))
+        let message = caesar::input("message? ");
+        let key = caesar::input("key? ");
+        (args[0].clone(), message, key)
     }
 }
 
 pub fn clean_key(code: &str) -> String {
-    let mut out_text = String::new();
-    for c in code.chars()
-    {
-        if c.is_alphabetic() {
-            out_text.push(c)
-        }
-    }
-    out_text
+    code.chars()
+        .filter(|c| c.is_alphabetic())
+        .collect()
 }
 
-pub fn shift_cipher_encode(text: &str, code:  &str) -> String {
-    let mut cipher_text = String::new();
+pub fn shift_cipher_encode(text: &str, code: &str) -> String {
     let code_chars = clean_key(code);
-
-    for i in 0..text.len(){
-        let c = text.chars().nth(i).unwrap();
-        let k = code_chars.chars().nth(i % code_chars.len()).unwrap();
-        let o = caesar::char_offset(k);
-        cipher_text.push(caesar::shift_cipher_encode_char(c, o));
-    }
-    cipher_text
+    text.chars()
+        .enumerate()
+        .map(|(i, c)| {
+            let k = code_chars.chars().nth(i % code_chars.len()).unwrap();
+            let o = caesar::char_offset(k);
+            caesar::shift_cipher_encode_char(c, o)
+        })
+        .collect()
 }
 
-pub fn shift_cipher_decode(text:  &str, code:  &str) -> String {
-    let mut cipher_text = String::new();
+pub fn shift_cipher_decode(text: &str, code: &str) -> String {
     let code_chars = clean_key(code);
+    text.chars()
+        .enumerate()
+        .map(|(i, c)| {
+            let k = code_chars.chars().nth(i % code_chars.len()).unwrap();
+            let o = caesar::char_offset(k);
+            caesar::shift_cipher_decode_char(c, o)
+        })
+        .collect()
+}
 
-    for i in 0..text.len(){
-        let c = text.chars().nth(i).unwrap();
-        let k = code_chars.chars().nth(i % code_chars.len()).unwrap();
-        let o = caesar::char_offset(k);
-        cipher_text.push(caesar::shift_cipher_decode_char(c, o));
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_clean_key() {
+        assert_eq!("KEY", clean_key("123KEY*&"));
     }
-    cipher_text
+
+    #[test]
+    fn test_shift_cipher_encode() {
+        let encoded = shift_cipher_encode("Hello World", "World");
+        println!("{}", encoded);
+        assert_eq!("Dscwr Kfcoz", encoded);
+    }
+
+    #[test]
+    fn test_shift_cipher_decode() {
+        let decoded = shift_cipher_decode("Dscwr Kfcoz", "World");
+        println!("{}", decoded);
+        assert_eq!("Hello World", decoded);
+    }
 }

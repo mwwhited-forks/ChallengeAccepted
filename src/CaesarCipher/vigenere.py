@@ -2,11 +2,17 @@
 from caesar import Caesar
 import sys
 
-class Vigenere:
-    "https://en.wikipedia.org/wiki/Vigen%C3%A8re_cipher"
 
-    def encode(input, key):
-        """ 
+class Vigenere:
+    """Implements Vigenere Cipher.
+
+    https://en.wikipedia.org/wiki/Vigen%C3%A8re_cipher
+    """
+
+    @staticmethod
+    def encode(message: str, key: str) -> str:
+        """Encodes message using Vigenere Cipher with given key.
+
         >>> Vigenere.encode('Hello World', 'Hello World')
         'Oiwwc Kfcok'
         >>> Vigenere.encode('hello world', 'Hello World')
@@ -17,17 +23,19 @@ class Vigenere:
         'dscwr kfcoz'
         """
         ret = ""
-        key = Vigenere.cleanKey(key)
-        for idx in range(len(input)):
-            c = input[idx]
+        key = Vigenere.clean_key(key)
+        for idx in range(len(message)):
+            c = message[idx]
             code = key[idx % len(key)]
-            offset = Caesar.getOffset(code)
-            enc = Caesar.encodeChar(c, offset)  
+            offset = Caesar.get_offset(code)
+            enc = Caesar.encode_char(c, offset)
             ret += enc
         return ret
-    
-    def decode(input, key):
-        """ 
+
+    @staticmethod
+    def decode(message: str, key: str) -> str:
+        """Decodes message using Vigenere Cipher with given key.
+
         >>> Vigenere.decode('Oiwwc Kfcok', 'Hello World')
         'Hello World'
         >>> Vigenere.decode('oiwwc kfcok', 'Hello World')
@@ -37,43 +45,41 @@ class Vigenere:
         >>> Vigenere.decode('dscwr kfcoz', 'World')
         'hello world'
         """
-
         ret = ""
-        key = Vigenere.cleanKey(key)
-        for idx in range(len(input)):
-            c = input[idx]
+        key = Vigenere.clean_key(key)
+        for idx in range(len(message)):
+            c = message[idx]
             code = key[idx % len(key)]
-            offset = Caesar.getOffset(code)
-            enc = Caesar.decodeChar(c, offset)  
+            offset = Caesar.get_offset(code)
+            enc = Caesar.decode_char(c, offset)
             ret += enc
         return ret
 
-    def cleanKey(key):
-        ret = ""
-        for c in key:
-            if c >= 'A' and c <= 'Z':
-                ret += c   
-            if c >= 'a' and c <= 'z':
-                ret += c   
-        return ret
+    @staticmethod
+    def clean_key(key: str) -> str:
+        """Removes all non-alphabetic characters from key.
 
-if __name__ == '__main__':   
+        >>> Vigenere.clean_key('Hello World')
+        'HelloWorld'
+        >>> Vigenere.clean_key('Hello, World!')
+        'HelloWorld'
+        """
+        return "".join(c for c in key if c.isalpha())
+
+
+if __name__ == '__main__':
     def inputs():
         if len(sys.argv) >= 3:
             return (sys.argv[1], sys.argv[2])
         else:
             return (input('message? '), input('key? '))
 
-    (message, code) = inputs()
+    message, key = inputs()
 
-    encoded = Vigenere.encode(message, code)
+    encoded = Vigenere.encode(message, key)
     print(f"Command: {sys.argv[0]}")
     print(f"Text: {message}")
-    print(f"Key: {code}")
+    print(f"Key: {key}")
     print(f"Encoded: {encoded}")
-    decoded = Vigenere.decode(encoded, code)
+    decoded = Vigenere.decode(encoded, key)
     print(f"Decoded: {decoded}")
-
-# Hello World
-# Hello World
-# Oiwwc Kfcok

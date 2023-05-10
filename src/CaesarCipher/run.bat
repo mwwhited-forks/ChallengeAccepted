@@ -9,6 +9,3 @@ ECHO '-- caesar.py'
 python caesar.py "Hello, World" H
 ECHO '-- vigenere.py'
 python vigenere.py "Hello, World" "Hello, World"
-
-REM python -m doctest caesar.py
-REM python -m doctest vigenere.py

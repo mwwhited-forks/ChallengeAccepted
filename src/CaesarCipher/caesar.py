@@ -5,7 +5,8 @@ import sys
 class Caesar:
     "https://en.wikipedia.org/wiki/Caesar_cipher"
 
-    def encode(input, key):
+    @staticmethod
+    def encode(input_str, key):
         """ 
         >>> Caesar.encode('Hello World', 'H')
         'Olssv Dvysk'
@@ -16,13 +17,14 @@ class Caesar:
         >>> Caesar.encode('hello world', 'C')
         'jgnnq yqtnf'
         """
-        offset = Caesar.getOffset(key)
+        offset = Caesar.get_offset(key)
         ret = ""
-        for c in input:         
-            ret += Caesar.encodeChar(c, offset)     
+        for c in input_str:         
+            ret += Caesar.encode_char(c, offset)     
         return ret
     
-    def decode(input, key):
+    @staticmethod
+    def decode(input_str, key):
         """ 
         >>> Caesar.decode('Olssv Dvysk', 'H')
         'Hello World'
@@ -33,35 +35,38 @@ class Caesar:
         >>> Caesar.decode('jgnnq yqtnf', 'C')
         'hello world'
         """
-        offset = Caesar.getOffset(key)
+        offset = Caesar.get_offset(key)
         ret = ""
-        for c in input:         
-            ret += Caesar.decodeChar(c, offset)     
+        for c in input_str:         
+            ret += Caesar.decode_char(c, offset)     
         return ret
 
-    def encodeChar(input, offset):
-        if input >= 'A' and input <= 'Z':
-            return chr(ord('A') + ((ord(input) - ord('A') + offset) % 26))
-        elif input >= 'a' and input <= 'z':
-            return chr(ord('a') + ((ord(input) - ord('a') + offset) % 26))
+    @staticmethod
+    def encode_char(input_char, offset):
+        if 'A' <= input_char <= 'Z':
+            return chr(ord('A') + ((ord(input_char) - ord('A') + offset) % 26))
+        elif 'a' <= input_char <= 'z':
+            return chr(ord('a') + ((ord(input_char) - ord('a') + offset) % 26))
         else:
-            return input
+            return input_char
         
-    def decodeChar(input, offset):
-        if input >= 'A' and input <= 'Z':
-            return chr(ord('A') + ((ord(input) - ord('A') - offset + 26) % 26))
-        elif input >= 'a' and input <= 'z':
-            return chr(ord('a') + ((ord(input) - ord('a') - offset + 26) % 26))
+    @staticmethod
+    def decode_char(input_char, offset):
+        if 'A' <= input_char <= 'Z':
+            return chr(ord('A') + ((ord(input_char) - ord('A') - offset + 26) % 26))
+        elif 'a' <= input_char <= 'z':
+            return chr(ord('a') + ((ord(input_char) - ord('a') - offset + 26) % 26))
         else:
-            return input    
+            return input_char    
     
-    def getOffset(code):
-        if code >= 'A' and code <= 'Z':
+    @staticmethod
+    def get_offset(code):
+        if 'A' <= code <= 'Z':
             return ord(code) - ord('A')
-        elif code >= 'a' and code <= 'z':
+        elif 'a' <= code <= 'z':
             return ord(code) - ord('a')
         else:
-            raise Exception('pick a code between A and Z')
+            raise Exception('Pick a code between A and Z')
 
 if __name__ == '__main__':
     def inputs():
