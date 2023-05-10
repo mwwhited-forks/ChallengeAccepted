@@ -14,9 +14,10 @@ ECHO '-- vigenere.py'
 python vigenere.py "Hello, World" "Hello, World"
 popd
 
+
 pushd csharp
 ECHO '-- caesar.cs'
-dotnet run "Hello World" H --project CaesarCipher.csproj
+dotnet run "Hello World" H 
 ECHO '-- vigenere.cs'
-dotnet run "Hello, World" "Hello World" --project CaesarCipher.csproj
+dotnet run "Hello, World" "Hello World" 
 popd
