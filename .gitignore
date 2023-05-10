@@ -3,3 +3,7 @@
 
 __pycache__/
 target/
+obj/
+bin/
+.vscode/
+.vs/

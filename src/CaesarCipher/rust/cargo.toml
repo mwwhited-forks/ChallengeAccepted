@@ -10,11 +10,11 @@ edition = "2018"
 
 [[bin]]
 name = "caesar-cipher"
-path = "caesar.rs"
+path = "rust/caesar.rs"
 
 [[bin]]
 name = "vigenere-cipher"
-path = "vigenere.rs"
+path = "rust/vigenere.rs"
 
 [profile.release]
 opt-level = 3
