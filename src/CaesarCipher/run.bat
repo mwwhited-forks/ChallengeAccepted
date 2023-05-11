@@ -14,10 +14,16 @@ ECHO '-- vigenere.py'
 python vigenere.py "Hello, World" "Hello, World"
 popd
 
-
 pushd csharp
 ECHO '-- caesar.cs'
 dotnet run "Hello World" H 
 ECHO '-- vigenere.cs'
-dotnet run "Hello, World" "Hello World" 
+dotnet run "Hello, World" "Hello, World"
 popd
+
+PUSHD java
+ECHO '-- CaesarCipher.java'
+javac *.java && java Program "Hello World" H
+ECHO '-- VigenereCipher.java'
+javac *.java && java Program "Hello, World" "Hello, World"
+POPD
