@@ -17,7 +17,8 @@ POPD
 
 PUSHD java
 ECHO '-- hello_world.java'
-javac HelloWorld.java && java HelloWorld
+REM javac HelloWorld.java && java HelloWorld
+java HelloWorld.java
 POPD
 
 PUSHD go

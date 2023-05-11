@@ -1,17 +1,21 @@
 @ECHO OFF
 
-pushd rust
+PUSHD rust
 ECHO '-- morse_code.rs'
 rustc morse_code.rs -o morse_code-rust.exe && morse_code-rust.exe "Hello, World"
-popd
+POPD
 
-REM pushd python
+REM PUSHD python
 REM ECHO '-- morsecode.py'
 REM python caesar.py "Hello, World"
-REM popd
+REM POPD
 
-
-pushd csharp
+PUSHD csharp
 ECHO '-- morsecode.cs'
 dotnet run "Hello World"
-popd
+POPD
+
+PUSHD java
+ECHO '-- MorseCode.java'
+javac *.java && java Program "Hello World"
+POPD

@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Main-Class: Program
+Version: 1.0
+Implementation-Vendor: Out-of-Band Development
+Implementation-Title: Morse Code
