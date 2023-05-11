@@ -83,7 +83,6 @@ pub fn shift_cipher_decode_char(c: char, shift: u8) -> char {
     }
 }
 
-
 #[cfg(test)]
 mod tests {
     use super::*;

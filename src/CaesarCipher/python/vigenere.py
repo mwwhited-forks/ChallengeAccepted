@@ -2,7 +2,6 @@
 from caesar import Caesar
 import sys
 
-
 class Vigenere:
     """Implements Vigenere Cipher.
 
