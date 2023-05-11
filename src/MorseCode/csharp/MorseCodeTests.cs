@@ -8,9 +8,9 @@ namespace MorseCode
         public TestContext TestContext { get; set; }
 
         [DataTestMethod]
-        [DataRow("Hello, World!", ".... . .-.. .-.. ---  .-- --- .-. .-.. _..")]
-        [DataRow("hello world", ".... . .-.. .-.. ---  .-- --- .-. .-.. _..")]
-        [DataRow("abcdefghijklmnopqrstuvwxyz1234567890", ".- -... -.-. _.. . ..-. --. .... .. .--- -.- .-.. -- -. --- .--. --.- .-. ... - ..- ...- .-- -..- -.-- --.. .---- ..--- ...-- ....- ..... -.... --... ---.. ----. -----")]
+        [DataRow("Hello, World!", ".... . .-.. .-.. ---  .-- --- .-. .-.. -..")]
+        [DataRow("hello world", ".... . .-.. .-.. ---  .-- --- .-. .-.. -..")]
+        [DataRow("abcdefghijklmnopqrstuvwxyz1234567890", ".- -... -.-. -.. . ..-. --. .... .. .--- -.- .-.. -- -. --- .--. --.- .-. ... - ..- ...- .-- -..- -.-- --.. .---- ..--- ...-- ....- ..... -.... --... ---.. ----. -----")]
         public void EncodeTest(string message, string expected)
         {
             var result = new MorseCode().Encode(message);
@@ -19,8 +19,8 @@ namespace MorseCode
         }
 
         [DataTestMethod]
-        [DataRow(".... . .-.. .-.. ---  .-- --- .-. .-.. _..", "HELLO WORLD")]
-        [DataRow( ".- -... -.-. _.. . ..-. --. .... .. .--- -.- .-.. -- -. --- .--. --.- .-. ... - ..- ...- .-- -..- -.-- --..  .---- ..--- ...-- ....- ..... -.... --... ---.. ----. -----", "ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890")]
+        [DataRow(".... . .-.. .-.. ---  .-- --- .-. .-.. -..", "HELLO WORLD")]
+        [DataRow( ".- -... -.-. -.. . ..-. --. .... .. .--- -.- .-.. -- -. --- .--. --.- .-. ... - ..- ...- .-- -..- -.-- --..  .---- ..--- ...-- ....- ..... -.... --... ---.. ----. -----", "ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890")]
         public void DecodeTest(string message, string expected)
         {
             var result = new MorseCode().Decode(message);

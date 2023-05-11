@@ -1,11 +1,11 @@
 
 @ECHO OFF
 
-REM pushd rust
-REM ECHO '-- rust'
-REM cargo test 
-REM popd
-REM 
+pushd rust
+ECHO '-- rust'
+cargo test 
+popd
+
 REM pushd python
 REM ECHO '-- python'
 REM python -m doctest -v caesar.py

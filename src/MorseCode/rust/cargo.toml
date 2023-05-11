@@ -1,5 +1,5 @@
 [package]
-name = "shift-ciphers"
+name = "morse-code"
 version = "0.1.0"
 authors = ["matthew Whited <matt@whited.us>"]
 edition = "2018"
@@ -9,12 +9,8 @@ edition = "2018"
 [dev-dependencies]
 
 [[bin]]
-name = "caesar-cipher"
-path = "caesar.rs"
-
-[[bin]]
-name = "vigenere-cipher"
-path = "vigenere.rs"
+name = "morse-code"
+path = "morse_code.rs"
 
 [profile.release]
 opt-level = 3
