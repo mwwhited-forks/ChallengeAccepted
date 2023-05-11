@@ -1,0 +1,11 @@
+*.exe
+*.pdb
+*.pdf
+*.class
+*.jar
+__pycache__/
+target/
+obj/
+bin/
+.vscode/
+.vs/
