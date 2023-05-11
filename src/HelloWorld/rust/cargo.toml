@@ -1,0 +1,16 @@
+[package]
+name = "hello-world"
+version = "0.1.0"
+authors = ["matthew Whited <matt@whited.us>"]
+edition = "2018"
+
+[dependencies]
+
+[dev-dependencies]
+
+[[bin]]
+name = "hello-world"
+path = "hello_world.rs"
+
+[profile.release]
+opt-level = 3
