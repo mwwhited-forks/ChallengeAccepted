@@ -1,17 +1,12 @@
 
 @ECHO OFF
 
-pushd rust
+PUSHD rust
 ECHO '-- rust'
 cargo test 
-popd
+POPD
 
-@REM pushd python
-@REM ECHO '-- python'
-@REM python -m doctest -v hello_world.py
-@REM popd
-
-pushd csharp
+PUSHD csharp
 ECHO '-- csharp'
 dotnet test
-popd
+POPD
