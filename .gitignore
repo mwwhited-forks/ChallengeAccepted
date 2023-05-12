@@ -3,6 +3,9 @@
 *.pdf
 *.class
 *.jar
+*.hi
+*.o
+
 __pycache__/
 target/
 obj/
