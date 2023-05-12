@@ -8,7 +8,6 @@ This isn't really a challenge so much as a minimum running solution per language
 * Haskell
 * Erlang
 * Scala
-* FSharp
 * Lisp
 * Julia
 * Kotlin
@@ -22,3 +21,4 @@ This isn't really a challenge so much as a minimum running solution per language
 * java
 * python
 * rust
+* FSharp
