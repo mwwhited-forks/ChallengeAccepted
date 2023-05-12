@@ -14,3 +14,8 @@ PUSHD java
 ECHO '-- MorseCode.java'
 javac *.java && java Program "Hello World"
 POPD
+
+PUSHD fsharp
+ECHO '-- morsecode.fs'
+dotnet run "Hello World"
+POPD
