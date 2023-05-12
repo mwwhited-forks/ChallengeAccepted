@@ -27,3 +27,10 @@ javac *.java && java Program "Hello World" H
 ECHO '-- VigenereCipher.java'
 javac *.java && java Program "Hello, World" "Hello, World"
 POPD
+
+PUSHD fsharp
+ECHO '-- caesar.fs'
+dotnet run "Hello World" H 
+ECHO '-- vigenere.fs'
+dotnet run "Hello, World" "Hello, World"
+POPD

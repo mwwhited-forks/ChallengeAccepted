@@ -1,18 +1,23 @@
 
 @ECHO OFF
 
-pushd rust
+PUSHD rust
 ECHO '-- rust'
 cargo test 
-popd
+POPD
 
-pushd python
+PUSHD python
 ECHO '-- python'
 python -m doctest -v caesar.py
 python -m doctest -v vigenere.py
-popd
+POPD
 
-pushd csharp
+PUSHD csharp
 ECHO '-- csharp'
 dotnet test
-popd
+POPD
+
+PUSHD csharp
+ECHO '-- csharp'
+dotnet test
+POPD
