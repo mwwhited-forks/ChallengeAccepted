@@ -15,6 +15,11 @@ ECHO '-- hello_world.cs'
 dotnet run
 POPD
 
+PUSHD fsharp
+ECHO '-- hello_world.fs'
+dotnet run
+POPD
+
 PUSHD java
 ECHO '-- hello_world.java'
 REM javac HelloWorld.java && java HelloWorld
