@@ -1,5 +1,4 @@
-﻿using Microsoft.VisualStudio.TestPlatform.CommunicationUtilities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -24,9 +23,10 @@ namespace TcpServer
         public void Start()
         {
             if (_listener != null) throw new ApplicationException("Already Started!");
+            Console.WriteLine($"{this.GetType()}::Starting: {Thread.CurrentThread.ManagedThreadId} [{IPAddress}:{Port}]");
             _listener = new TcpListener(IPAddress, Port);
             _listener.Start();
-            var _cts = new CancellationTokenSource();
+            _cts = new CancellationTokenSource();
 
             var serviceLoopTask = Task.Run(() => ServiceLoopAsync(_listener, _cts.Token));
             var startTask = Task.Run(() => OnStartAsync(_cts.Token));
@@ -36,9 +36,9 @@ namespace TcpServer
 
         protected virtual Task OnStartAsync(CancellationToken cancellationToken) => Task.CompletedTask;
 
-        public async Task<IAsyncDisposable> Stop()
+        public async Task<IAsyncDisposable> StopAsync()
         {
-            _cts.Cancel();
+            _cts?.Cancel();
             await Task.Yield();
 
             foreach (var client in _clients)
@@ -50,7 +50,7 @@ namespace TcpServer
                 }
             }
 
-            _listener.Stop();
+            _listener?.Stop();
             await Task.Yield();
             return this;
         }
@@ -61,28 +61,36 @@ namespace TcpServer
             var clientIdSeed = 0;
             while (!cancellationToken.IsCancellationRequested)
             {
-                var accepted = await listener.AcceptTcpClientAsync();
-                var clientId = clientIdSeed++;
-                _clients.Add(clientId, accepted);
-
-
-                var clientTask = Task.Run(async () =>
+                try
                 {
-                    Console.WriteLine($"{this.GetType()}::ServiceLoopAsync::Accepted: {clientId}-{Thread.CurrentThread.ManagedThreadId}");
-                    await AcceptClientAsync(clientId, accepted, cts.Token);
-                    Console.WriteLine($"{this.GetType()}::ServiceLoopAsync::Closed:   {clientId}-{Thread.CurrentThread.ManagedThreadId}");
-                });
-                _tasks.Add(clientTask);
+                    Console.WriteLine($"{this.GetType()}::ServiceLoopAsync::Listening: {Thread.CurrentThread.ManagedThreadId}");
+                    var accepted = await listener.AcceptTcpClientAsync(cts.Token);
+                    var clientId = clientIdSeed++;
+                    _clients.Add(clientId, accepted);
 
-                await Task.Yield();
 
-                var areCompleted = _tasks.Where(t => t.IsCompleted).ToArray();
-                foreach (var completed in areCompleted)
-                    _tasks.Remove(completed);
+                    var clientTask = Task.Run(async () =>
+                    {
+                        Console.WriteLine($"{this.GetType()}::ServiceLoopAsync::Accepted: {clientId}-{Thread.CurrentThread.ManagedThreadId}");
+                        await AcceptClientAsync(clientId, accepted, cts.Token);
+                        Console.WriteLine($"{this.GetType()}::ServiceLoopAsync::Closed:   {clientId}-{Thread.CurrentThread.ManagedThreadId}");
+                    });
+                    _tasks.Add(clientTask);
 
-                var areNotCollected = _clients.Where(c => !c.Value.Connected).ToArray();
-                foreach (var notCollected in areNotCollected)
-                    _clients.Remove(notCollected.Key);
+                    await Task.Yield();
+
+                    var areCompleted = _tasks.Where(t => t.IsCompleted).ToArray();
+                    foreach (var completed in areCompleted)
+                        _tasks.Remove(completed);
+
+                    var areNotCollected = _clients.Where(c => !c.Value.Connected).ToArray();
+                    foreach (var notCollected in areNotCollected)
+                        _clients.Remove(notCollected.Key);
+                }
+                catch (OperationCanceledException ocex)
+                {
+                    Console.WriteLine($"{this.GetType()}::ServiceLoopAsync::Canceled: {Thread.CurrentThread.ManagedThreadId} ({ocex.Message})");
+                }
             }
         }
 
@@ -90,23 +98,31 @@ namespace TcpServer
         {
             var cts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
             using var stream = accepted.GetStream();
-            while (!cancellationToken.IsCancellationRequested)
+            Memory<byte> buffer = new byte[1024];
+            while (!cancellationToken.IsCancellationRequested && accepted.Connected)
             {
-                if (stream.CanRead)
+                try
                 {
-                    Memory<byte> buffer = new byte[1024];
-                    var readLength = await stream.ReadAsync(buffer, cts.Token);
-                    if (readLength > 0)
+                    if (stream.CanRead)
                     {
-                        var sliced = buffer.Slice(0, readLength);
-                        await MessageReceivedAsync(clientId, accepted, sliced, cts.Token);
+                        var readLength = await stream.ReadAsync(buffer, cts.Token);
+                        if (readLength > 0)
+                        {
+                            var sliced = buffer.Slice(0, readLength);
+                            Console.WriteLine($"{this.GetType()}: {clientId}-{Thread.CurrentThread.ManagedThreadId}: {Encoding.UTF8.GetString(sliced.ToArray())}");
+                            await MessageReceivedAsync(clientId, accepted, sliced, cts.Token);
+                        }
+                        else if (readLength <= 0)
+                        {
+                            break;
+                        }
                     }
-                    else if (readLength == -1)
-                    {
-                        break;
-                    }
+                    await Task.Yield();
                 }
-                await Task.Yield();
+                catch (OperationCanceledException ocex)
+                {
+                    Console.WriteLine($"{this.GetType()}::ServiceLoopAsync::Canceled: {clientId}-{Thread.CurrentThread.ManagedThreadId} ({ocex.Message})");
+                }
             }
         }
 
@@ -122,13 +138,13 @@ namespace TcpServer
 
         public async ValueTask DisposeAsync()
         {
-            _cts.Cancel();
-            _listener.Stop();
+            _cts?.Cancel();
+            _listener?.Stop();
 
             await Task.Yield();
 
             await Task.WhenAll(
-                _task,
+                _task ?? Task.CompletedTask,
                 Task.WhenAll(_tasks)
                 );
 
@@ -142,7 +158,7 @@ namespace TcpServer
 
             await Task.Yield();
 
-            _cts.Dispose();
+            _cts?.Dispose();
         }
     }
 }

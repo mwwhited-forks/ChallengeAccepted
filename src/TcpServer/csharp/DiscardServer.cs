@@ -14,10 +14,7 @@ namespace TcpServer
         {
         }
 
-        protected override Task MessageReceivedAsync(int clientId, TcpClient accepted, Memory<byte> message, CancellationToken cancellationToken)
-        {
-            Console.WriteLine($"DiscardServer: {clientId}-{Thread.CurrentThread.ManagedThreadId}: {Encoding.UTF8.GetString(message.ToArray())}");
-            return Task.CompletedTask;
-        }
+        protected override Task MessageReceivedAsync(int clientId, TcpClient accepted, Memory<byte> message, CancellationToken cancellationToken) =>
+            Task.CompletedTask;
     }
 }

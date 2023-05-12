@@ -1,22 +1,22 @@
 ﻿using System;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace TcpServer
 {
-    public class DaytimeServer : ServerBase
+    public class TimeServer : ServerBase
     {
-        public DaytimeServer(IPAddress? ipAddress = default, ushort port = 13)
+        public TimeServer(IPAddress? ipAddress = default, ushort port = 37)
             : base(ipAddress, port)
         {
         }
 
         protected override async Task MessageReceivedAsync(int clientId, TcpClient accepted, Memory<byte> message, CancellationToken cancellationToken)
         {
-            Memory<byte> buffer = Encoding.UTF8.GetBytes(DateTimeOffset.Now.ToString());
+            var timeDiff = DateTimeOffset.UtcNow.ToUnixTimeSeconds() - new DateTimeOffset(1900, 1, 1, 0, 0, 0, new TimeSpan(0, 0, 0)).ToUnixTimeSeconds();
+            Memory<byte> buffer = BitConverter.GetBytes((int)timeDiff);
             await accepted.GetStream().WriteAsync(buffer);
         }
     }
