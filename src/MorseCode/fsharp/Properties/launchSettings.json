@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "fsharp": {
+      "commandName": "Project",
+      "commandLineArgs": "\"Hello, World\""
+    }
+  }
+}
