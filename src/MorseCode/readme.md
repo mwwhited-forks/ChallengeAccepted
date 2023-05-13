@@ -13,7 +13,7 @@ Write a program to convert to an from Morse code.
 * Write a method to input a string and convert the string to Morse code.
 * Exclude undefined characters.
 * Use a `.` for `dot` and `-` for `dash`
-* Use a blank `space " "` for character seperation
+* Use a blank `space " "` for character separation
 
 ## Bonus 1
 
@@ -26,6 +26,7 @@ Write a program to convert to an from Morse code.
 ### Encoding Patterns (International)
 
 | Character  | Pattern | 
+|------------|---------|
 | A          | .-      | 
 | B          | -...    | 
 | C          | -.-.    | 

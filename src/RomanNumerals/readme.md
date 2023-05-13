@@ -13,6 +13,10 @@ Write a method to take numeric values and convert them to Roman Numeral strings
 
 Write a method to parse Roman Numeral strings and convert them to numeric values
 
+## Double Secret Bonus
+
+Include per character support for Vinculum (overbar) which is a 1000 times multiplier
+
 ## Notes and References 
 
 [Roman_numerals - Wikipedia](https://en.wikipedia.org/wiki/Roman_numerals)
@@ -20,6 +24,7 @@ Write a method to parse Roman Numeral strings and convert them to numeric values
 ### Value Map
 
 | Character | Arabic value |
+|-----------|--------------|
 | I         | 1            | 
 | V         | 5            | 
 | X         | 10           | 

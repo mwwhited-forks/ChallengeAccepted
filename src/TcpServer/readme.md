@@ -17,7 +17,7 @@ Many of the protocols running on top of TCP/IP were created using simple text mn
 
 ## Suggestions
 
-* Telnet and Netcat can be used to connect to arbtation TCP/IP ports
+* Telnet and Netcat can be used to connect to arbitrary TCP/IP ports
   * Telnet in intended to be used as a text terminal and as such may include some extra 
     overhead information so if you use it for testing make sure to handle or ignore that 
     information.
@@ -27,6 +27,7 @@ Many of the protocols running on top of TCP/IP were created using simple text mn
 This is a list of some simple testing protocols and their related port numbers.
 
 | Port | Protocol | Description                                                                             |
+|------|----------|-----------------------------------------------------------------------------------------|
 | 7    | Echo     | Echo will respond back to the calling client with whatever it receives                  |
 | 9    | Discard  | Discard will simple throw away and not response to any client requests                  |
 | 13   | Daytime  | This service should return text for the current date/time for any received request      |
