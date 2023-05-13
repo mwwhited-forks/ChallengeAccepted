@@ -31,7 +31,7 @@ ECHO '-- hello_world.go'
 go run hello_world.go
 POPD
 
-PUSHD haskell
-ECHO '-- hello_world.hs'
-ghc helloworld.hs && helloworld.exe
-POPD
+@REM PUSHD haskell
+@REM ECHO '-- hello_world.hs'
+@REM ghc helloworld.hs && helloworld.exe
+@REM POPD

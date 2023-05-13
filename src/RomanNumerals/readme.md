@@ -27,6 +27,13 @@ Write a method to parse Roman Numeral strings and convert them to numeric values
 | C         | 100          | 
 | D         | 500          | 
 | M         | 1000         | 
+| /I        | 1000         | 
+| /V        | 5000         | 
+| /X        | 10000        | 
+| /L        | 50000        | 
+| /C        | 100000       | 
+| /D        | 500000       | 
+| /M        | 1000000      | 
 
 ### Usage Notes
 
