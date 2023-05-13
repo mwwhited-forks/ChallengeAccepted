@@ -2,7 +2,7 @@
 
 ## Summary
 
-A Caesar cipher is a simple subtition cipher based on shifting a given alphabete by an offset.
+A Caesar cipher is a simple substitution cipher based on shifting a given alphabet by an offset.
 
 The cipher can be decoded by using the negative offset of the cipher.
 
@@ -15,7 +15,7 @@ The cipher can be decoded by using the negative offset of the cipher.
 ## Bonus
 
 A more complex variation on a Caesar cipher is the Vigenère cipher.  This uses a keyword for
-multiple offsets by rotating though the keywork for each letter changing the substitution alphabet
+multiple offsets by rotating though the keyword for each letter changing the substitution alphabet
 per letter.
 
 * Use your Caesar cipher as a base to create a Vigenère cipher

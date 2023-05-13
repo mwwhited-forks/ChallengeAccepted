@@ -4,7 +4,7 @@
 
 A `Magic 8-ball` is a toy containing a white multi-sided die suspended in a dark liquid.
 It is played by holding the ball with the window down, shaking while asking a question,
-then flipping over to see the respose.
+then flipping over to see the response.
 
 ## Challenge
 
