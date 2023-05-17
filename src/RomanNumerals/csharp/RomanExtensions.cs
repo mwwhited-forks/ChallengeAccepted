@@ -5,13 +5,14 @@ namespace RomanNumerals
 {
     public static class RomanExtensions
     {
-        internal static IEnumerable<int> FirstPass(this string value)
+        internal static IEnumerable<int> FirstPass(this IEnumerable<char> value)
         {
             var enumerator = value.GetEnumerator();
             while (enumerator.MoveNext())
             {
-                if (enumerator.Current == '/' && enumerator.MoveNext())
+                if (enumerator.Current == '/')
                 {
+                    if (!enumerator.MoveNext()) throw new ApplicationException("invalid. unexpected end of input");
                     yield return enumerator.Current.GetValue() * 1000;
                 }
                 else
@@ -19,8 +20,6 @@ namespace RomanNumerals
                     yield return enumerator.Current.GetValue();
                 }
             }
-
-            yield break;
         }
 
         internal static IEnumerable<int> SecondPass(this IEnumerable<int> inputs)
