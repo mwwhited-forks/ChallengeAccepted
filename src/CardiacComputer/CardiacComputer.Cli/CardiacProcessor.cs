@@ -177,6 +177,35 @@ public class CardiacProcessor
 
                     default:
                         throw new ApplicationException("Invalid instruction");
+
+                    // --- these are custom extensions
+
+                    // if ACC < 0 jump backwards
+                    case TACoB:
+                        if (_accumulator < 0)
+                            _programCounter -= instruction.Operand;
+                        break;
+
+                    // if ACC < 0 jump forward
+                    case TACoF:
+                        if (_accumulator < 0)
+                            _programCounter += instruction.Operand;
+                        break;
+
+                    // (ACC ← ACC * MEM[a])
+                    case MUL:
+                        _accumulator *= loadFrom(instruction.Operand);
+                        break;
+
+                    // (ACC ← ACC / MEM[a])
+                    case DIV:
+                        _accumulator /= loadFrom(instruction.Operand);
+                        break;
+
+                    // (ACC ← ACC % MEM[a])
+                    case MOD:
+                        _accumulator %= loadFrom(instruction.Operand);
+                        break;
                 }
             }
             finally

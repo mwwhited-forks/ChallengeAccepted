@@ -44,4 +44,30 @@ public enum Opcodes
     /// </summary>
     HRS = 9,
 
+    // --- these are custom extensions
+
+    /// <summary>
+    /// Test accumulator and jump back offset if negative
+    /// </summary>
+    TACoB = 10,
+
+    /// <summary>
+    /// Test accumulator and jump forward offset if negative
+    /// </summary>
+    TACoF = 11,
+
+    /// <summary>
+    /// multiple accumulator by value at address
+    /// </summary>
+    MUL = 12,
+
+    /// <summary>
+    /// divide accumulator by value at address
+    /// </summary>
+    DIV = 13,
+
+    /// <summary>
+    /// modulo accumulator by value at address
+    /// </summary>
+    MOD = 14,
 }

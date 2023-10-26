@@ -30,17 +30,17 @@ internal class Program
 
     public static CardiacProcessor AddNumbers() => new(
         17,
-        (INP, _a), // get input a
-        (INP, _b), // get input b
-        (CLA, _a), // set accumulator to a
-        (ADD, _b), // add b to accumulator
+        (INP, _a),      // get input a
+        (INP, _b),      // get input b
+        (CLA, _a),      // set accumulator to a
+        (ADD, _b),      // add b to accumulator
         (STO, _result), // store to s
         (OUT, _result), // output s
-        (HRS, 0)   // halt and reset
+        (HRS, 0)        // halt and reset
     );
 
     public static CardiacProcessor CountNumbers() => new CardiacProcessor(
-        20, //set entry point offset
+        20,        //set entry point offset
         (CLA, 01), //set accumulator to value in 1
 
         (STO, 03), // store accumulator to 3
@@ -87,10 +87,10 @@ internal class Program
         (TAC, 20), // if accumulator is < 0 then jump
 
         (HRS, 0)   // halt and reset
-    )
-    .Set(1, 1) // seed data 1 as 1
-    .Set(17, 0) // seed data 17 as 0
-    .Set(19, -4) // see data 19 as -4
+    ) 
+    .Set(1, 1)     // seed data 1 as 1
+    .Set(17, 0)    // seed data 17 as 0
+    .Set(19, -4)   // see data 19 as -4
     ;
 
     public static CardiacProcessor CountNumbersWithEndingLong() => new CardiacProcessor(
@@ -111,9 +111,9 @@ internal class Program
         (TAC, 21), // if accumulator is < 0 then jump
         (HRS, 0)   // halt and reset
     )
-    .Set(1, 1) // seed data 1 as 1
-    .Set(17, 0) // seed data 17 as 0
-    .Set(19, -4) // see data 19 as -4
+    .Set(1, 1)     // seed data 1 as 1
+    .Set(17, 0)    // seed data 17 as 0
+    .Set(19, -4)   // see data 19 as -4
     ;
 
     const int _inc = 1;
@@ -140,14 +140,14 @@ internal class Program
         /* 26 */(ADD, _inc),     // add value from 1
         /* 27 */(STO, _result),  // store value to 4 
         /* 28 */(ADD, _counter), // add value from 1
-        /* 29 */(TAC, 25),       // if accumulator is < 0 then jump back 5
+        /* 29 */(TACoB, 5),      // if accumulator is < 0 then jump back 5
 
         /* 30 */(OUT, _result),  // output value in 4
 
         /* 31 */(HRS, 0)         // halt and reset
     )
-    .Set(_inc, 1) // seed data 1 as 1
-    .Set(_zero, 0) // seed data 2 as 0
+    .Set(_inc, 1)                // seed data 1 as 1
+    .Set(_zero, 0)               // seed data 2 as 0
     ;
 
 
@@ -161,7 +161,7 @@ internal class Program
         // if a < b then swap a and b
         (CLA, _b),          // 22: set accumulator b
         (SUB, _a),          // 23: subtract a 
-        (TAC, 31),          // 24: if a < b then swap
+        (TACoF, 6),         // 24: if a < b then swap
         (CLA, _a),          // 25: set accumulator to a
         (STO, _temp),       // 26: store a to temp
         (CLA, _b),          // 27: load b
@@ -184,15 +184,40 @@ internal class Program
         (CLA, _counter),    // 38: set accumulator to value from 4
         (ADD, _inc),        // 39: add value from 1
         (STO, _counter),    // 40: store value to 4 
-        (TAC, 35),          // 41: if accumulator is < 0 then loop back
+        (TACoB, 7),         // 41: if accumulator is < 0 then loop back
 
         // output result
         (OUT, _result),     // 42: output value in 4
 
+        //(CLA, _result),
+        //(SFT, 10),          // shift left
+        //(STO, _c),          // store to c
+        //(SFT, 02),          // shift right
+        //(STO, _d),          // store to d
+        //(OUT, _c),          // 42: output c
+        //(OUT, _d),          // 42: output d
+
         // end
         (HRS, 0)            // 43: halt and reset
     )
-    .Set(_inc, 1)  // seed data 1 as 1
-    .Set(_zero, 0) // seed data 2 as 0
+    .Set(_inc, 1)           // seed data 1 as 1
+    .Set(_zero, 0)          // seed data 2 as 0
+    ;
+
+
+    public static CardiacProcessor MultiplySimple() => new CardiacProcessor(
+        20,
+
+        //read inputs 
+        (INP, _a),      // 20: read A
+        (CLA, _a),      // 29: load temp
+        (INP, _a),      // 20: read A
+        (MUL, _a),      // 21: read B
+        (STO, _result), // 32: set result to 0
+        (OUT, _result), // 42: output value in 4
+        (HRS, 00)       // 43: halt and reset
+    )                   
+    .Set(_inc, 1)       // seed data 1 as 1
+    .Set(_zero, 0)      // seed data 2 as 0
     ;
 }
