@@ -56,39 +56,48 @@ and whimsicality that filld his magical world.";
         var editDistance = new WagnerFischerDistance();
         //var editDistance = new LevenshteinDistance();
 
-        Console.WriteLine(new string('=', Console.WindowWidth));
-        foreach (var misspelling in misspelled)
+        //Console.WriteLine(new string('=', Console.WindowWidth));
+        //foreach (var misspelling in misspelled)
+        //{
+        //    Console.WriteLine(new string('-', Console.WindowWidth));
+        //    Console.WriteLine($"{misspelling}");
+
+        //    //var uniqueLetters = misspelling.Distinct().ToArray();
+        //    var guesses = from possible in wordList
+        //                      //    //assume they start with the same letter 
+        //                      //where possible[0] == misspelling[0]
+        //                      //// reduce to words are similar length
+        //                      //where Math.Abs(possible.Length - misspelling.Length) < misspelling.Length - 2
+        //                      //// ensure that words share at least 3 letters
+        //                      //where uniqueLetters.Where(possible.Contains).Count() > 3
+        //                      ////calculate edit distance between words
+        //                  let distance = editDistance.Calculate<char>(misspelling, possible)
+        //                  let weight = Weight<char>(misspelling, possible)
+        //                  orderby distance, weight descending
+        //                  select new
+        //                  {
+        //                      possible,
+        //                      distance,
+        //                      weight,
+        //                  };
+
+        //    // get 5 best matches 
+        //    var allGuesses = guesses.Take(10);
+
+        //    foreach (var guess in allGuesses)
+        //    {
+        //        Console.WriteLine($"\t{guess.possible} ({guess.distance}, {guess.weight})");
+        //    }
+        //}
+
+        var tree = new BkTree<char>() { EditDistance = editDistance };
+        foreach (var word in wordList.Take(100))
         {
-            Console.WriteLine(new string('-', Console.WindowWidth));
-            Console.WriteLine($"{misspelling}");
-
-            //var uniqueLetters = misspelling.Distinct().ToArray();
-            var guesses = from possible in wordList
-                              //    //assume they start with the same letter 
-                              //where possible[0] == misspelling[0]
-                              //// reduce to words are similar length
-                              //where Math.Abs(possible.Length - misspelling.Length) < misspelling.Length - 2
-                              //// ensure that words share at least 3 letters
-                              //where uniqueLetters.Where(possible.Contains).Count() > 3
-                              ////calculate edit distance between words
-                          let distance = editDistance.Calculate<char>(misspelling, possible)
-                          let weight = Weight<char>(misspelling, possible)
-                          orderby distance, weight descending
-                          select new
-                          {
-                              possible,
-                              distance,
-                              weight,
-                          };
-
-            // get 5 best matches 
-            var allGuesses = guesses.Take(10); 
-
-            foreach (var guess in allGuesses)
-            {
-                Console.WriteLine($"\t{guess.possible} ({guess.distance}, {guess.weight})");
-            }
+            if (word != null)
+                tree.Add(word.AsMemory());
         }
+
+        var results = tree.Search("azb".AsMemory(), 12);
     }
 
     public static double Weight<T>(ReadOnlySpan<T> left, ReadOnlySpan<T> right)
@@ -103,7 +112,7 @@ and whimsicality that filld his magical world.";
         for (var i = 0; i < Math.Min(left.Length, right.Length); i++)
         {
             if (left[i].CompareTo(right[i]) == 0)
-                weight += 1d / (i+1);
+                weight += 1d / (i + 1);
         }
 
         return weight;

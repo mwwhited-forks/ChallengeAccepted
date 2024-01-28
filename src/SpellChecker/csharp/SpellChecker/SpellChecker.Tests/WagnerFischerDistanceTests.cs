@@ -15,6 +15,7 @@ public class WagnerFischerDistanceTests
     [DataRow("can", "fater", 4)]
     [DataRow("smart", "blend", 5)]
     [DataRow("littel", "little", 2)]
+    [DataRow("makin", "akin", 1)]
     public void CalculateTest(string left, string right, int expectedDistance)
     {
         var result = new WagnerFischerDistance().Calculate<char>(left, right);
