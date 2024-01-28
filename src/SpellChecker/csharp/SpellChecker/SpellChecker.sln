@@ -8,7 +8,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{88ABA888-A3AD-4D5E-83B1-409B5C8F424A}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		example.txt = example.txt
 		..\..\readme.md = ..\..\readme.md
+		wordlist.txt = wordlist.txt
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpellChecker.Tests", "SpellChecker.Tests\SpellChecker.Tests.csproj", "{88AFB642-89A3-44AB-BBD7-0C2A1F6E4FDD}"
