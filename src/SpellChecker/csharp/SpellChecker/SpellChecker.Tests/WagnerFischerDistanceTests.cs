@@ -4,7 +4,7 @@ using SpellChecker.Common;
 namespace SpellChecker.Tests;
 
 [TestClass]
-public class LevenshteinDistanceTests
+public class WagnerFischerDistanceTests
 {
     public required TestContext TestContext { get; set; }
 
@@ -16,8 +16,8 @@ public class LevenshteinDistanceTests
     [DataRow("smart", "blend", 5)]
     public void CalculateTest(string left, string right, int expectedDistance)
     {
-        var result = new LevenshteinDistance().Calculate<char>(left, right);
-        TestContext.WriteLine($"\"{left}\"->\"{right}\" Levenshtein distance:  {result}");
+        var result = new WagnerFischerDistance().Calculate<char>(left, right);
+        TestContext.WriteLine($"\"{left}\"->\"{right}\" Wagner-Fischer distance:  {result}");
         Assert.AreEqual(expectedDistance, result);
     }
 }
