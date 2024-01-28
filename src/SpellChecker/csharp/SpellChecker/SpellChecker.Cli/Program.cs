@@ -53,50 +53,51 @@ and whimsicality that filld his magical world.";
 
         Console.WriteLine($"misspelled words: {string.Join(", ", misspelled)}");
 
-        var suggestions = from word in misspelled //.Take(1)
+        Console.WriteLine(new string('=', Console.WindowWidth));
+        foreach (var misspelling in misspelled)
+        {
+
+            /*
+
                           let uniqueLetters = word.Distinct().ToArray()
                           let guesses = (from possible in wordList
 
                                          where Math.Abs(possible.Length - word.Length) < word.Length - 2
-
-                                         /*
-                                        faraway (1)
-                                        faraday (2)
-                                        caraway (2)
-                                        thrawed (3)
-                                        scrawly (3)
-                                         */
-                                         //where word.Where(possible.Contains).Count() > 4
-
-                                         // /*
-                                         //faraway (1)
-                                         //farrowed (3)
-                                         //farewell (3)
-                                         //frayed (3)
-                                         //forayer (3)
-                                         // */
-                                         where uniqueLetters.Where(possible.Distinct().Contains).Count() > 3
+            where uniqueLetters.Where(possible.Distinct().Contains).Count() > 3
 
                                          let distance = LevenshteinDistance.Calculate<char>(word, possible)
-                                         where distance < word.Length
+                                         where distance<word.Length
                                          select new
                                          {
                                              possible,
                                              distance
                                          }).AsParallel().OrderBy(p => p.distance).Take(5).ToArray()
+                */
+
+
+            Console.WriteLine(new string('-', Console.WindowWidth));
+            Console.WriteLine($"{misspelling}");
+
+            var uniqueLetters = misspelling.Distinct().ToArray();
+            var guesses = from possible in wordList
+                          //assume they start with the same letter 
+                          where possible[0] == misspelling[0]
+                          // reduce to words are similar length
+                          where Math.Abs(possible.Length - misspelling.Length) < misspelling.Length - 2
+                          // ensure that words share at least 3 letters
+                          where uniqueLetters.Where(possible.Contains).Count() > 3
+                          //calculate edit distance between words
+                          let distance = LevenshteinDistance.Calculate<char>(misspelling, possible)
                           select new
                           {
-                              word,
-                              guesses = guesses.Take(5).ToArray()
+                              possible,
+                              distance
                           };
 
-        Console.WriteLine(new string('=', Console.WindowWidth));
-        foreach (var suggestion in suggestions)
-        {
-            Console.WriteLine(new string('-', Console.WindowWidth));
-            Console.WriteLine($"{suggestion.word}");
+            // get 5 best matches 
+            var allGuesses = guesses.AsParallel().ToArray().OrderBy(c => c.distance).Take(5).ToArray();
 
-            foreach (var guess in suggestion.guesses)
+            foreach (var guess in allGuesses)
             {
                 Console.WriteLine($"\t{guess.possible} ({guess.distance})");
             }
