@@ -79,8 +79,8 @@ and whimsicality that filld his magical world.";
             Console.WriteLine($"{misspelling}");
 
             var uniqueLetters = misspelling.Distinct().ToArray();
-            var guesses = from possible in wordList
-                          //assume they start with the same letter 
+            var guesses = from possible in wordList.AsParallel()
+                              //assume they start with the same letter 
                           where possible[0] == misspelling[0]
                           // reduce to words are similar length
                           where Math.Abs(possible.Length - misspelling.Length) < misspelling.Length - 2
@@ -95,7 +95,7 @@ and whimsicality that filld his magical world.";
                           };
 
             // get 5 best matches 
-            var allGuesses = guesses.AsParallel().ToArray().OrderBy(c => c.distance).Take(5).ToArray();
+            var allGuesses = guesses.ToArray().OrderBy(c => c.distance).Take(5).ToArray();
 
             foreach (var guess in allGuesses)
             {
