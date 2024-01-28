@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34408.163
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpellChecker.Cli", "SpellChecker.Cli\SpellChecker.Cli.csproj", "{62776D20-4D3A-46BC-8610-97B88DCA83E1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{88ABA888-A3AD-4D5E-83B1-409B5C8F424A}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\readme.md = ..\..\readme.md
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpellChecker.Tests", "SpellChecker.Tests\SpellChecker.Tests.csproj", "{88AFB642-89A3-44AB-BBD7-0C2A1F6E4FDD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpellChecker.Common", "SpellChecker.Common\SpellChecker.Common.csproj", "{5ACE78E4-472B-46B6-8593-718B1D2DA71D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{62776D20-4D3A-46BC-8610-97B88DCA83E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62776D20-4D3A-46BC-8610-97B88DCA83E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62776D20-4D3A-46BC-8610-97B88DCA83E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62776D20-4D3A-46BC-8610-97B88DCA83E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88AFB642-89A3-44AB-BBD7-0C2A1F6E4FDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88AFB642-89A3-44AB-BBD7-0C2A1F6E4FDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88AFB642-89A3-44AB-BBD7-0C2A1F6E4FDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88AFB642-89A3-44AB-BBD7-0C2A1F6E4FDD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5ACE78E4-472B-46B6-8593-718B1D2DA71D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5ACE78E4-472B-46B6-8593-718B1D2DA71D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5ACE78E4-472B-46B6-8593-718B1D2DA71D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5ACE78E4-472B-46B6-8593-718B1D2DA71D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {43B2CF12-6CF9-4EF7-8681-8B6CDD29E52B}
+	EndGlobalSection
+EndGlobal
