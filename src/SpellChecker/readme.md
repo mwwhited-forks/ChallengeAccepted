@@ -3,7 +3,7 @@
 ## Summary
 
 Spell checking can require multiple algorithms working together to efficiently
-detect misspellings and make suggestions on how how to correct the word.
+detect misspellings and make suggestions on how to correct the word.
 
 ## Notes and References
 
