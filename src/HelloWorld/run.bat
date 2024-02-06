@@ -41,6 +41,11 @@ ECHO '-- hello_world.ts'
 CALL node hello_world.ts
 POPD
 
+PUSHD ruby
+ECHO '-- hello_world.rb'
+CALL ruby hello_world.rb
+POPD
+
 @REM PUSHD haskell
 @REM ECHO '-- hello_world.hs'
 @REM CALL ghc helloworld.hs && helloworld.exe
