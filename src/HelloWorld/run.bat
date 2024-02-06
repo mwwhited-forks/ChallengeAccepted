@@ -2,7 +2,7 @@
 
 PUSHD rust
 ECHO '-- hello_world.rs'
-CALL cargo run hello_world.rs
+CALL cargo run --quiet hello_world.rs
 POPD
 
 PUSHD python
@@ -29,6 +29,16 @@ POPD
 PUSHD go
 ECHO '-- hello_world.go'
 CALL go run hello_world.go
+POPD
+
+PUSHD php
+ECHO '-- hello_world.php'
+CALL php hello_world.php
+POPD
+
+PUSHD typescript
+ECHO '-- hello_world.ts'
+CALL node hello_world.ts
 POPD
 
 @REM PUSHD haskell
