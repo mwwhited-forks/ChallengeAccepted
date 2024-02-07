@@ -1,2 +1,3 @@
-
-console.log('Hello World!')
+// TypeScript code
+const greeting: string = "Hello, world!";
+console.log(greeting);

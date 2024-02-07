@@ -1,52 +1,57 @@
 @ECHO OFF
 
-PUSHD rust
-ECHO '-- hello_world.rs'
+pushd rust
+echo '-- hello_world.rs (Rust)'
 CALL cargo run --quiet hello_world.rs
-POPD
+popd
 
-PUSHD python
-ECHO '-- hello_world.py'
+pushd python
+echo '-- hello_world.py (Python)'
 CALL python hello_world.py
-POPD
+popd
 
-PUSHD csharp
-ECHO '-- hello_world.cs'
+pushd csharp
+echo '-- hello_world.cs (C#)'
 CALL dotnet run
-POPD
+popd
 
-PUSHD fsharp
-ECHO '-- hello_world.fs'
+pushd fsharp
+echo '-- hello_world.fs (F#)'
 CALL dotnet run
-POPD
+popd
 
-PUSHD java
-ECHO '-- hello_world.java'
-REM javac HelloWorld.java && java HelloWorld
+pushd java
+echo '-- hello_world.java (Java)'
 CALL java HelloWorld.java
-POPD
+popd
 
-PUSHD go
-ECHO '-- hello_world.go'
+pushd go
+echo '-- hello_world.go (Go)'
 CALL go run hello_world.go
-POPD
+popd
 
-PUSHD php
-ECHO '-- hello_world.php'
+pushd php
+echo '-- hello_world.php (PHP)'
 CALL php hello_world.php
-POPD
+popd
 
-PUSHD typescript
-ECHO '-- hello_world.ts'
-CALL node hello_world.ts
-POPD
+@REM pushd typescript
+@REM echo '-- hello_world.ts (TypeScript)'
+@REM CALL npm install ts-node typescript '@types/node' >NUL 2>&1
+@REM CALL ts-node hello_world.ts
+@REM popd
 
-PUSHD ruby
-ECHO '-- hello_world.rb'
+pushd javascript
+echo '-- hello_world.js (JavaScript)'
+CALL node hello_world.js
+popd
+
+pushd ruby
+echo '-- hello_world.rb (Ruby)'
 CALL ruby hello_world.rb
-POPD
+popd
 
-@REM PUSHD haskell
-@REM ECHO '-- hello_world.hs'
-@REM CALL ghc helloworld.hs && helloworld.exe
-@REM POPD
+pushd haskell
+echo '-- hello_world.hs (Haskell)'
+CALL runhaskell helloworld.hs
+popd
