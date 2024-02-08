@@ -1,57 +1,57 @@
 #!/bin/bash
 
-pushd rust
+pushd rust > /dev/null
 echo '-- hello_world.rs (Rust)'
 cargo run --quiet hello_world.rs
-popd
+popd > /dev/null
 
-pushd python
+pushd python > /dev/null
 echo '-- hello_world.py (Python)'
 python hello_world.py
-popd
+popd > /dev/null
 
-pushd csharp
+pushd csharp > /dev/null
 echo '-- hello_world.cs (C#)'
 dotnet run
-popd
+popd > /dev/null
 
-pushd fsharp
+pushd fsharp > /dev/null
 echo '-- hello_world.fs (F#)'
 dotnet run
-popd
+popd > /dev/null
 
-pushd java
+pushd java > /dev/null
 echo '-- hello_world.java (Java)'
 java HelloWorld.java
-popd
+popd > /dev/null
 
-pushd go
+pushd go > /dev/null
 echo '-- hello_world.go (Go)'
 go run hello_world.go
-popd
+popd > /dev/null
 
-pushd php
+pushd php > /dev/null
 echo '-- hello_world.php (PHP)'
 php hello_world.php
-popd
+popd > /dev/null
 
-# pushd typescript
+# pushd typescript > /dev/null
 # echo '-- hello_world.ts (TypeScript)'
-# CALL npm install --global ts-node typescript '@types/node'
-# CALL ts-node hello_world.ts
-# popd
+# npm install --global ts-node typescript '@types/node'
+# ts-node hello_world.ts
+# popd > /dev/null
 
-pushd javascript
+pushd javascript > /dev/null
 echo '-- hello_world.js (JavaScript)'
-CALL node hello_world.js
-popd
+node hello_world.js
+popd > /dev/null
 
-pushd ruby
+pushd ruby > /dev/null
 echo '-- hello_world.rb (Ruby)'
 ruby hello_world.rb
-popd
+popd > /dev/null
 
-pushd haskell
+pushd haskell > /dev/null
 echo '-- hello_world.hs (Haskell)'
 runhaskell helloworld.hs
-popd
+popd > /dev/null
