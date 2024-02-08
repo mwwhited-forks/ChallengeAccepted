@@ -16,7 +16,7 @@ namespace TcpServer
 
         protected ServerBase(IPAddress? ipAddress = default, ushort port = 65535)
         {
-            IPAddress = ipAddress ?? IPAddress.Loopback;
+            IPAddress = ipAddress ?? IPAddress.Parse("0.0.0.0"); // IPAddress.Loopback;
             Port = port;
         }
 
