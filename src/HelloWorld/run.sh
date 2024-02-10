@@ -35,11 +35,10 @@ echo '-- hello_world.php (PHP)'
 php hello_world.php
 popd > /dev/null
 
-# pushd typescript > /dev/null
-# echo '-- hello_world.ts (TypeScript)'
-# npm install --global ts-node typescript '@types/node'
-# ts-node hello_world.ts
-# popd > /dev/null
+pushd typescript > /dev/null
+echo '-- hello_world.ts (TypeScript)'
+npm install typescript --save-dev && npx tsc *.ts --outDir ./compiled/ && node ./compiled/hello_world.js
+popd > /dev/null
 
 pushd javascript > /dev/null
 echo '-- hello_world.js (JavaScript)'
