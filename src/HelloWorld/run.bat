@@ -1,4 +1,4 @@
-@ECHO OFF
+REM @ECHO OFF
 
 pushd rust
 echo '-- hello_world.rs (Rust)'
@@ -56,4 +56,10 @@ popd
 pushd haskell
 echo '-- hello_world.hs (Haskell)'
 CALL runhaskell helloworld.hs
+popd
+
+pushd cobol
+echo '-- hello_world.cbl (Cobol)'
+CALL cobc -x hello_world.cbl -j
+del hello_world
 popd

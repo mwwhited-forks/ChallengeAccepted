@@ -54,3 +54,9 @@ pushd haskell > /dev/null
 echo '-- hello_world.hs (Haskell)'
 runhaskell helloworld.hs
 popd > /dev/null
+
+pushd cobol > /dev/null
+echo '-- hello_world.cbl (Cobol)'
+cobc -x hello_world.cbl -j
+rm hello_world
+popd > /dev/null
