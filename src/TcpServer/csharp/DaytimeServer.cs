@@ -5,19 +5,13 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace TcpServer
-{
-    public class DaytimeServer : ServerBase
-    {
-        public DaytimeServer(IPAddress? ipAddress = default, ushort port = 13)
-            : base(ipAddress, port)
-        {
-        }
+namespace TcpServer;
 
-        protected override async Task MessageReceivedAsync(int clientId, TcpClient accepted, Memory<byte> message, CancellationToken cancellationToken)
-        {
-            Memory<byte> buffer = Encoding.UTF8.GetBytes(DateTimeOffset.Now.ToString());
-            await accepted.GetStream().WriteAsync(buffer);
-        }
+public class DaytimeServer(IPAddress? ipAddress = default, ushort port = 13) : ServerBase(ipAddress, port)
+{
+    protected override async Task MessageReceivedAsync(int clientId, TcpClient accepted, Memory<byte> message, CancellationToken cancellationToken)
+    {
+        Memory<byte> buffer = Encoding.UTF8.GetBytes(DateTimeOffset.Now.ToString());
+        await accepted.GetStream().WriteAsync(buffer, cancellationToken);
     }
 }

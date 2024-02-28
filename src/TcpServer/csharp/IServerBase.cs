@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace TcpServer
+namespace TcpServer;
+
+public interface IServerBase : IAsyncDisposable
 {
-    public interface IServerBase : IAsyncDisposable
-    {
-        void Start();
-        Task<IAsyncDisposable> StopAsync();
-    }
+    void Start();
+    Task<IAsyncDisposable> StopAsync();
 }
