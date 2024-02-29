@@ -120,7 +120,7 @@ public abstract class ServerBase(IPAddress? ipAddress = default, ushort port = 6
         }
     }
 
-    protected abstract Task MessageReceivedAsync(int clientId, TcpClient accepted, Memory<byte> message, CancellationToken cancellationToken);
+    protected abstract Task MessageReceivedAsync(int clientId, TcpClient accepted, ReadOnlyMemory<byte> message, CancellationToken cancellationToken);
 
     private CancellationTokenSource? _cts;
     private TcpListener? _listener;

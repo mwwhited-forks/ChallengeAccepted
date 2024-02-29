@@ -35,6 +35,6 @@ public class ChargenServer(IPAddress? ipAddress = default, ushort port = 19) : S
         }
     }
 
-    protected override Task MessageReceivedAsync(int clientId, TcpClient accepted, Memory<byte> message, CancellationToken cancellationToken) =>
+    protected override Task MessageReceivedAsync(int clientId, TcpClient accepted, ReadOnlyMemory<byte> message, CancellationToken cancellationToken) =>
         Task.CompletedTask;
 }
