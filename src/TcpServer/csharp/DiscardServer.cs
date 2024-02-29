@@ -5,16 +5,10 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace TcpServer
-{
-    public class DiscardServer : ServerBase
-    {
-        public DiscardServer(IPAddress? ipAddress = default, ushort port = 9)
-            : base(ipAddress, port)
-        {
-        }
+namespace TcpServer;
 
-        protected override Task MessageReceivedAsync(int clientId, TcpClient accepted, Memory<byte> message, CancellationToken cancellationToken) =>
-            Task.CompletedTask;
-    }
+public class DiscardServer(IPAddress? ipAddress = default, ushort port = 9) : ServerBase(ipAddress, port)
+{
+    protected override Task MessageReceivedAsync(int clientId, TcpClient accepted, Memory<byte> message, CancellationToken cancellationToken) =>
+        Task.CompletedTask;
 }

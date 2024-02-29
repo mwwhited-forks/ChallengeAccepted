@@ -11,16 +11,9 @@ public class CardiacProcessor
         ) : this(offset, instructions.AsEnumerable())
     {
     }
-    public CardiacProcessor(
-        int offset,
-        IEnumerable<Instruction> instructions
-        )
-    {
-        Set(offset, instructions.Select(instr => (int)instr).ToArray());
-        if (offset > 0)
-            this[0] = (Instruction)(JMP, offset);
-    }
-
+        /// <summary>
+        /// Constructor for CardiacProcessor class with offset and instructions parameters.
+        /// </summary>
     public CardiacProcessor Set(int offset, params int[] values)
     {
         foreach (var item in values.Select((value, address) => (value, address)))
@@ -34,32 +27,9 @@ public class CardiacProcessor
     private int _executedInstructions = 0;
     private IEnumerator<int>? _last = null;
 
-    public IReadOnlyCollection<int?> Memory => _memory;
-    public int ProgramCounter => _programCounter;
-    public int Accumulator => _accumulator;
-    public int ExecutedInstructions => _executedInstructions;
-
-    public int this[int address]
-    {
-        get => _memory[address % _memory.Length] ?? 0;
-        set => _memory[address % _memory.Length] = value;
-    }
-
-    public static IEnumerable<int> getInputs()
-    {
-        while (true)
-        {
-            Console.ForegroundColor = ConsoleColor.Blue;
-            Console.Write("Enter a number? ");
-            int value;
-            while (!int.TryParse(Console.ReadLine(), out value)) ;
-
-            Console.ForegroundColor = ConsoleColor.DarkCyan;
-            Console.Write($"read={value:000} ");
-
-            yield return value;
-        }
-    }
+    /// <summary>
+    /// A function that returns an IEnumerable<int> by prompting the user to enter a number and yielding each entered value.
+    /// </summary>
     private int getInput(IEnumerator<int> input)
     {
         if (!input.MoveNext()) throw new ApplicationException("No input found");

@@ -2,33 +2,32 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace TcpServer
+namespace TcpServer;
+
+public class Program
 {
-    public class Program
+    public static async Task Main(string[] args)
     {
-        public static async Task Main(string[] args)
+        var services = new List<IServerBase>()
         {
-            var services = new List<IServerBase>()
-            {
-                new EchoServer(),
-                new DiscardServer(),
-                new DaytimeServer(),
-                new TimeServer(),
-                new ChargenServer(),
-            };
-            foreach (var service in services)
-            {
-                service.Start();
-            }
+            new EchoServer(),
+            new DiscardServer(),
+            new DaytimeServer(),
+            new TimeServer(),
+            new ChargenServer(),
+        };
+        foreach (var service in services)
+        {
+            service.Start();
+        }
 
-            Console.WriteLine("Running!");
-            Console.ReadLine();
+        Console.WriteLine("Running!");
+        Console.ReadLine();
 
-            foreach (var service in services)
-            {
-                var dis = await service.StopAsync();
-                await dis.DisposeAsync();
-            }
+        foreach (var service in services)
+        {
+            var dis = await service.StopAsync();
+            await dis.DisposeAsync();
         }
     }
 }
