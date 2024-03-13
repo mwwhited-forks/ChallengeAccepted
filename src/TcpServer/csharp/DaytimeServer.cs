@@ -9,7 +9,7 @@ namespace TcpServer;
 
 public class DaytimeServer(IPAddress? ipAddress = default, ushort port = 13) : ServerBase(ipAddress, port)
 {
-    protected override async Task MessageReceivedAsync(int clientId, TcpClient accepted, Memory<byte> message, CancellationToken cancellationToken)
+    protected override async Task MessageReceivedAsync(int clientId, TcpClient accepted, ReadOnlyMemory<byte> message, CancellationToken cancellationToken)
     {
         Memory<byte> buffer = Encoding.UTF8.GetBytes(DateTimeOffset.Now.ToString());
         await accepted.GetStream().WriteAsync(buffer, cancellationToken);

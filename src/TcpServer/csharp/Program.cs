@@ -15,6 +15,7 @@ public class Program
             new DaytimeServer(),
             new TimeServer(),
             new ChargenServer(),
+            new HttpServer("./web-root"),
         };
         foreach (var service in services)
         {
