@@ -7,11 +7,7 @@ import (
 )
 
 func main() {
-
-	args := os.Args[1:]
-	input := strings.Join(args, " ")
-
-	fmt.Println(input)
+	fmt.Println(strings.Join(os.Args[1:], " "))
 }
 
 func GetOffset(code rune) (int, error) {
