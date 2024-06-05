@@ -11,7 +11,7 @@ namespace TcpServer;
 
 public abstract class ServerBase(IPAddress? ipAddress = default, ushort port = 65535) : IServerBase
 {
-    protected IPAddress IPAddress { get; init; } = ipAddress ?? IPAddress.Loopback;
+    protected IPAddress IPAddress { get; init; } = ipAddress ?? IPAddress.Any;
     protected ushort Port { get; init; } = port;
 
     public void Start()
