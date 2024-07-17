@@ -3,13 +3,13 @@
 
 PUSHD rust
 ECHO '-- rust'
-cargo test 
+CALL cargo test 
 POPD
 
 PUSHD python
 ECHO '-- python'
-python -m doctest -v caesar.py
-python -m doctest -v vigenere.py
+CALL python -m doctest -v caesar.py
+CALL python -m doctest -v vigenere.py
 POPD
 
 PUSHD csharp
@@ -17,7 +17,12 @@ ECHO '-- csharp'
 dotnet test
 POPD
 
-PUSHD csharp
-ECHO '-- csharp'
+PUSHD fsharp
+ECHO '-- fsharp'
 dotnet test
+POPD
+
+PUSHD go
+ECHO '-- go'
+CALL test
 POPD
