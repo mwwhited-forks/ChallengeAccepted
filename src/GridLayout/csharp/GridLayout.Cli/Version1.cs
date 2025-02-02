@@ -19,7 +19,7 @@ public class Version1
         {
             for (var ix = 0; ix <= columns; ix++)
             {
-                Console.ForegroundColor = ConsoleColor.White;
+               // Console.ForegroundColor = ConsoleColor.White;
 
                 if (ix == 0 && iy == 0)
                 {
@@ -59,16 +59,15 @@ public class Version1
 
                     var tile = possible[rand.Next() % possible.Length];
                     tiles[y, x] = tile;
-                    Console.ForegroundColor = tile.ToConsoleColor();
-                    Console.Write($"{tile}\t");
+                    //Console.ForegroundColor = tile.ToConsoleColor();
+                    //Console.Write($"{tile}\t");
                 }
-                Console.WriteLine();
+               // Console.WriteLine();
             }
         }
 
-        Console.ResetColor();
+        //Console.ResetColor();
 
         return tiles;
     }
-
 }
