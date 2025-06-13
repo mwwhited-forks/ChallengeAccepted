@@ -10,14 +10,14 @@ Write a program to convert to an from Morse code.
 
 ## Challenge
 
-* Write a method to input a string and convert the string to Morse code.
-* Exclude undefined characters.
-* Use a `.` for `dot` and `-` for `dash`
-* Use a blank `space " "` for character separation
+- Write a method to input a string and convert the string to Morse code.
+- Exclude undefined characters.
+- Use a `.` for `dot` and `-` for `dash`
+- Use a blank `space " "` for character separation
 
-## Bonus 1
+## Bonus
 
-* Write a method to parse Morse code back into text
+- Write a method to parse Morse code back into text
 
 ## Notes and References
 
