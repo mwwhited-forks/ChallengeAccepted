@@ -1,45 +1,46 @@
-# Roman Numerals
+﻿# Roman Numerals
 
 ## Summary
 
-Roman Numerals are an ancient number system.  In modern times it is often used
-for aesthetic value such as for dates, clocks and text outlines.  
+Roman numerals are an ancient numeral system used throughout the Roman Empire and still seen today for 
+aesthetic and traditional purposes (e.g., clock faces, chapter headings). They represent numbers using 
+combinations of letters from the Latin alphabet.
 
 ## Challenge
 
-Write a method to take numeric values and convert them to Roman Numeral strings
+- Write a function that takes a positive integer and returns its Roman numeral representation as a string
+- Follow standard rules for subtractive notation (e.g., `IV` for 4, `IX` for 9)
+- Support values up to 3,999 using the basic symbols
 
 ## Bonus
 
-Write a method to parse Roman Numeral strings and convert them to numeric values
+- Write a function that parses a valid Roman numeral string and returns its integer value
+- Validate input and handle invalid or malformed Roman numerals gracefully
 
 ## Double Secret Bonus
 
-Include per character support for Vinculum (overbar) which is a 1000 times multiplier
+- Extend both conversion functions to support the **vinculum** (overbar) notation, where placing an overbar 
+  above a symbol multiplies its value by 1,000 (e.g., an overbar `V` = 5,000)
+- Design a text‑based convention for input and output (for example, prefixing with `_` to denote the overbar)
 
-## Notes and References 
+## Notes and References
 
-[Roman_numerals - Wikipedia](https://en.wikipedia.org/wiki/Roman_numerals)
+- [Roman numerals – Wikipedia](https://en.wikipedia.org/wiki/Roman_numerals)
 
 ### Value Map
 
-| Character | Arabic value |
-|-----------|--------------|
-| I         | 1            | 
-| V         | 5            | 
-| X         | 10           | 
-| L         | 50           | 
-| C         | 100          | 
-| D         | 500          | 
-| M         | 1000         | 
-| /I        | 1000         | 
-| /V        | 5000         | 
-| /X        | 10000        | 
-| /L        | 50000        | 
-| /C        | 100000       | 
-| /D        | 500000       | 
-| /M        | 1000000      | 
+| Character | Arabic Value |
+| --------- | ------------ |
+| I         | 1            |
+| V         | 5            |
+| X         | 10           |
+| L         | 50           |
+| C         | 100          |
+| D         | 500          |
+| M         | 1000         |
 
 ### Usage Notes
 
-If character is subtracted if the following character is of higher value.
+- Place smaller values before larger ones to subtract (e.g., `IV` = 4, `XL` = 40).
+- Otherwise, place values in descending order and sum (e.g., `XII` = 12, `LXX` = 70).
+- Do not repeat the same symbol more than three times in a row.
