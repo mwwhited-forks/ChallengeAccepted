@@ -7,12 +7,12 @@ internal class Program
         var graph = GetGraph();
 
         var seed = 0;
-        var before = Console.ForegroundColor;
+        var before = Console.BackgroundColor;
 
         do
         {
             Console.Clear();
-            Console.ForegroundColor = before;
+            Console.BackgroundColor = before;
             Console.WriteLine(seed);
             Console.WriteLine(new string('-', Console.WindowWidth));
 
@@ -54,7 +54,7 @@ internal class Program
                     }
 
                     map[x, y] = result;
-                    Console.ForegroundColor = result.Name[0] switch
+                    Console.BackgroundColor = result.Name[0] switch
                     {
                         'l' => ConsoleColor.DarkGreen,
                         'b' => ConsoleColor.Blue,
@@ -63,13 +63,13 @@ internal class Program
                         'c' => ConsoleColor.Gray,
                         'h' => ConsoleColor.Green,
                     };
-                    Console.Write(result.Name[0]);
+                    Console.Write(' '); // result.Name[0]
                 }
-                Console.WriteLine();
+                Console.WriteLine(); 
             }
             seed++;
         } while (Console.ReadKey().Key != ConsoleKey.Escape);
-        Console.ForegroundColor = before;
+        Console.BackgroundColor = before;
     }
 
     public static NodeItem GetGraph()
