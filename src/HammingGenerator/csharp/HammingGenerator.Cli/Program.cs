@@ -2,118 +2,68 @@
 
 internal class Program
 {
+    public static int Fact(int value) =>
+        (int)Math.Ceiling(Math.Exp(Enumerable.Range(1, value).Select(i => Math.Log(i)).Sum()));
+
     static void Main(string[] args)
     {
-        var bitdepth = 5;
+        var bitdepth = 8;
         var mask = (int)Math.Pow(2, bitdepth) - 1;
 
-        for (var distance = 0; distance < bitdepth; distance++)
+        var masks = new List<(int mask, int distance)>();
+        masks.Add((mask, 0));
+
+        var distance = bitdepth;
+
+        //Console.WriteLine($"mask\tb:{Convert.ToString(mask, 2).PadLeft(15, '0')}");
+        for (var d = 0; d < bitdepth; d++)
         {
-            if (distance == 0)
-            {
-                //Console.WriteLine($"{Convert.ToString(mask, 2).PadLeft(10, '0')}\t0");
-            }
-            else
-            {
-                var bitCnt = distance;
-                var shiftCnt = bitdepth - distance;
-
-                Console.WriteLine($"b:{bitCnt}\ts:{shiftCnt}");
-
-                var set = new List<int>();
-                var oset = new List<int>();
-                for (var b = 0; b < bitdepth; b++)
-                {
-                    set.Add(1 << b);
-                }
-
-                if (bitCnt == 1)
-                {
-                    oset = set;
-                }
-                else if (bitCnt > 1)
-                {
-                    for (var s = 1; s < bitCnt; s++)
-                    {
-                        var pSet = set.ToArray();
-                        foreach (var p in pSet)
-                        {
-                            var v = (p << 1) + 1;
-                            //if (s == (bitCnt - 1))
-                            {
-                                set.Add(v);
-                            }
-                            if (s ==( bitCnt - 1))
-                            {
-                                oset.Add(v);
-                            }
-                        }
-                    }
-                }
-
-                foreach (var b in oset)
-                {
-                    Console.WriteLine(Convert.ToString(b, 2).PadLeft(8, '0'));
-                }
-
-
-                //var bits = from b in Enumerable.Range(0, bitdepth)
-                //           let i = (1 << b) << (distance - 1)
-                //           where i < mask
-                //           select i + (distance - 1);
-
-                //var cnt = Math.Ceiling((float)bitdepth / bits.Count());
-                //Console.WriteLine(cnt);
-
-                ////for (var c = 0; c < cnt; c++)
-                //    foreach (var imask in bits)
-                //    {
-                //        Console.WriteLine($"{Convert.ToString(imask, 2).PadLeft(10, '0')}\t{distance}\t{imask}");
-                //    }
-            }
-
-            Console.WriteLine(new string('-', 10));
+            var c = Fact(bitdepth) / (Fact(d) * Fact(bitdepth - d));
+            // Console.WriteLine($"{d}\t{c}");
         }
 
-        //var bits = 2;
-        //for (var s = 0; s < bits; s++)
-        //{
-        //    for (var b = 0; b < bitdepth; b++)
-        //    {
-        //        //Console.WriteLine($"{mask - (1 << b)}\t1");
-        //    }
+        var set = new List<int>();
 
-        //    //Console.WriteLine($"{mask - (1 << b)}\t1");
-        //}
+        for (var b = 0; b < bitdepth; b++)
+        {
+            var v = 1 << b;
+            set.Add(v);
+        }
+        var idx = 0;
+        foreach (var s in set)
+        {
+            // Console.WriteLine($"{1}-{Convert.ToString(s, 2).PadLeft(15, '0')}-({s:000})-{idx++:00}");
+            masks.Add((mask - s, 1));
+        }
 
+        for (var d = 1; d < distance; d++)
+        {
+            var set2 = new List<int>();
+            foreach (var s in set)
+            {
+                var v = (s << 1) + 1;
+                for (var x = 0; x <= bitdepth - d; x++)
+                {
+                    var v2 = v << x;
+                    if (v2 < mask)
+                        set2.Add(v2);
+                }
+            }
+            set.Clear();
+            set.AddRange(set2);
+            set2.Clear();
 
+            idx = 0;
+            foreach (var s in set.Distinct().Order())
+            {
+                //Console.WriteLine($"{d+1}-{Convert.ToString(s, 2).PadLeft(15, '0')}-({s:000})-{idx++:00}");
+                masks.Add((mask - s, d));
+            }
+        }
 
-        //var query = from distance in Enumerable.Range(0, bitdepth)
-        //            select new
-        //            {
-        //                mask,
-        //                distance,
-        //            };
-
-        //foreach (var item in query)
-        //{
-        //    Console.WriteLine(item);
-        //    Console.WriteLine($"\tShifts:{bitdepth - item.distance}");
-
-
-        //    //var bits = from i in Enumerable.Range(0, bitdepth)
-        //    //           select new
-        //    //           {
-        //    //               bit = 1 << i,
-        //    //           };
-
-        //    //foreach (var i in bits)
-        //    //{
-        //    //    Console.WriteLine($"\t{i}");
-        //    //}
-
-
-
-        //}
+        foreach (var s in masks)
+        {
+            Console.WriteLine($"{s.distance}-{Convert.ToString(s.mask, 2).PadLeft(bitdepth, '0')}");
+        }
     }
 }
